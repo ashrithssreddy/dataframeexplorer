@@ -23,6 +23,8 @@ Functions:
 [x] Level of dataset
 Univariate Analysis
 Bivariate Analysis
+Show progress bar for level_of_dataset
+Run the level_of_dataset code in parallel for performance
 
 Changes:
 ~~Return value for all functions to be included into documentation~~
