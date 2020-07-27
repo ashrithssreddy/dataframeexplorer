@@ -8,6 +8,7 @@
 #' @param dataset A data.frame
 #' @param output_filename Name of the output text file (should end in ".txt", although the backend will append if not)
 #' Function's default is "level_of_dataset_<system_time>.txt"
+#' @param verbose Pass TRUE for detailed output
 #' @return Does not return to calling function, writes to file system rather
 #' @export
 #' @examples
@@ -15,7 +16,7 @@
 #' level_of_data(dataset = iris[,c("mpg", "cyl", "disp", "hp")], output_filename = "level_mtcars.txt")
 #' }
 
-level_of_data <- function(dataset, output_filename = "") {
+level_of_data <- function(dataset, output_filename = "", verbose = TRUE) {
 
   if (output_filename == "") {
     output_filename <- gsub(x = paste0("level_of_data_", Sys.time(), ".csv"), pattern = " |:|-", replacement = "_")
@@ -26,8 +27,6 @@ level_of_data <- function(dataset, output_filename = "") {
   cat("Writing level of data results to ", output_filename)
   data.frame(count_cols = integer(0), column_combination = character(0), duplicates = integer(0), is_level = logical(0)) %>%
     data.table::fwrite(output_filename)
-
-
 
   concatenated <- NULL
 
@@ -61,7 +60,9 @@ level_of_data <- function(dataset, output_filename = "") {
       if (duplicates == 0) {
         message(paste(paste(column_combinations[j, ], collapse = " x "), "is found to be a level")) # , "\n"
       }else{
-        cat(paste(paste(column_combinations[j, ], collapse = " x "), "is found to be not a level", "\n"))
+        if(verbose == TRUE){
+          cat(paste(paste(column_combinations[j, ], collapse = " x "), "is found to be not a level", "\n"))
+        }
       }
       rm(concatenated_combination, duplicates); invisible(gc());
     }
@@ -79,7 +80,7 @@ level_of_data <- function(dataset, output_filename = "") {
     cat(paste0(rep("#", 90), collapse = ""),"\n")
     column_combinations <- generate_column_combinations(dataset, i)
     check_for_level(dataset, column_combinations)
-    cat(stringr::str_interp("Please open a copy of ${output_filename} for the report generated so far."))
+    cat(stringr::str_interp("Please open a COPY of ${output_filename} for the report generated so far."))
     cat("\n");
   }
 
