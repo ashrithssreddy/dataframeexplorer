@@ -27,11 +27,11 @@
 #' }
 
 frequency_table <- function(dataset, output_filename = "", maximum_entries = 2^20, format_width = TRUE,
-                             sl_no_required = TRUE,
-                             frequency_required = TRUE,
-                             percentage_required = TRUE,
-                             cumulative_percentage_required = FALSE,
-                             string_length_required = TRUE) {
+                            sl_no_required = TRUE,
+                            frequency_required = TRUE,
+                            percentage_required = TRUE,
+                            cumulative_percentage_required = FALSE,
+                            string_length_required = TRUE) {
 
   .data <- frequency <- cumulative_percentage <- percentage <- sl_no <- string_length <- NULL
 
@@ -42,6 +42,17 @@ frequency_table <- function(dataset, output_filename = "", maximum_entries = 2^2
     output_filename <- paste0(output_filename, ".xlsx")
   }
   message("Writing frequency table of dataset to ", output_filename)
+  cat("\n")
+
+  message(stringr::str_interp("Understanding the output (${output_filename}):"))
+
+  message("Each worksheet in the output pertains to a column in input dataset.")
+  message("sl_no: Serial number, just a unique identifier assigned to each unique entry sequentially.")
+  message("<field-name>: Distinct element present in the column of input dataset.")
+  message("frequency: Count of occurrence of each distinct element in the column of input dataset.")
+  message("percentage: frequency column converted to percentage.")
+  message("string_length: Number of characters in string equivalent of an entry. Can be useful while disambiguating missing value (NA) with blank spaces.")
+  cat("\n")
 
   dataset <- dataset %>% dplyr::mutate_if(is.factor, as.character) # Change factor columns to character
   data.table::setDT(dataset)                                      # Changing class of dataset to data.table
@@ -90,9 +101,9 @@ frequency_table <- function(dataset, output_filename = "", maximum_entries = 2^2
 
     openxlsx::writeData(workbook, i, frequency_table)                  # Write frequency table to workbook at ith position
 
-    message(paste0(names(dataset)[i], " - Completed"))                  # For status printing
+    message(paste0("Generated frequency table for column " , i , " - ", names(dataset)[i])) # For status printing
   }
-  openxlsx::saveWorkbook(workbook, file = output_filename)             # Write final excel and unmount it from R
 
+  openxlsx::saveWorkbook(workbook, file = output_filename)             # Write final excel and unmount it from R
   invisible()                                                          # To return nothing
 }
