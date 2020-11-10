@@ -61,7 +61,7 @@ level_of_data <- function(dataset, output_filename = "", verbose = TRUE) {
         message(paste(paste(column_combinations[j, ], collapse = " x "), "is found to be a level")) # , "\n"
       }else{
         if(verbose == TRUE){
-          cat(paste(paste(column_combinations[j, ], collapse = " x "), "is found to be not a level", "\n"))
+          cat(paste(paste(column_combinations[j, ], collapse = " x "), "is not found to be a level", "\n"))
         }
       }
       rm(concatenated_combination, duplicates); invisible(gc());
@@ -69,14 +69,22 @@ level_of_data <- function(dataset, output_filename = "", verbose = TRUE) {
   }
 
   data.table::setDF(dataset)
-  cat("\n", paste0(ncol(dataset), " columns present in dataframe passed to function:"))
+  cat("\n", paste0(ncol(dataset), " columns present in dataframe passed to function: "))
   dataset %>% names %>% paste(collapse = ", ") %>% paste0("\n") %>% cat
 
+  if(verbose == TRUE){
+    cat("\n")
+    message(stringr::str_interp("Understanding the output (${output_filename}):"))
+    message("count_cols: Count of columns in the column-combination checked")
+    message("column_combination: Columns-combination that is checked for duplicates")
+    message("duplicates: Count of duplicates found in that column combination")
+    message("is_level: (Binary) True / False indicating if the combination is the level")
+  }
 
   for (i in seq_len(ncol(dataset))) {
     cat("\n")
     cat(paste0(rep("#", 90), collapse = ""),"\n")
-    cat(paste0(i, " COLUMN COMBINATION(S) WILL BE CHECKED FOR LEVEL BELOW:", "\n"))
+    cat(paste0(i, " COLUMN COMBINATION(S) WILL BE CHECKED FOR LEVEL:", "\n"))
     cat(paste0(rep("#", 90), collapse = ""),"\n")
     column_combinations <- generate_column_combinations(dataset, i)
     check_for_level(dataset, column_combinations)
