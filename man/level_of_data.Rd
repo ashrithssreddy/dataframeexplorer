@@ -4,13 +4,15 @@
 \alias{level_of_data}
 \title{Determine the level / primary key of dataset}
 \usage{
-level_of_data(dataset, output_filename = "")
+level_of_data(dataset, output_filename = "", verbose = TRUE)
 }
 \arguments{
 \item{dataset}{A data.frame}
 
 \item{output_filename}{Name of the output text file (should end in ".txt", although the backend will append if not)
 Function's default is "level_of_dataset_<system_time>.txt"}
+
+\item{verbose}{Pass TRUE for detailed output}
 }
 \value{
 Does not return to calling function, writes to file system rather
