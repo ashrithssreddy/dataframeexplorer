@@ -1,7 +1,7 @@
 rm(list=ls())
 cat("\014")
 
-detect_dupl_cols <- function(df){
+detect_dupl_cols <- function(df, duplicate_col = "right"){
 
   duplicate_cols = NULL
   for(col_1 in df %>% select(1:last_col(1)) %>% names()){
@@ -11,8 +11,12 @@ detect_dupl_cols <- function(df){
         next
       }
 
-      if(sum(df[,col_1] != df[,col_2]) ==0){
-        duplicate_cols = c(duplicate_cols, col_2)
+      if(all(df[,col_1] == df[,col_2])){
+
+        if(duplicate_col == "right"){
+          duplicate_cols = c(duplicate_cols, col_2)
+        }else{
+          duplicate_cols = c(duplicate_cols, col_1)}
       }
     }
   }
