@@ -30,11 +30,14 @@ detect_dupl_cols <- function(df, duplicate_col = "right"){
       }
 
       if(all(df[,col_1] == df[,col_2])){
-
         if(duplicate_col == "right"){
           duplicate_cols = c(duplicate_cols, col_2)
+        }else if(duplicate_col == "left"){
+          duplicate_cols = c(duplicate_cols, col_1)
         }else{
-          duplicate_cols = c(duplicate_cols, col_1)}
+          message("Invalid value passed to duplicate_col parameter (pass 'left' or 'right'). Using default value")
+          duplicate_cols = c(duplicate_cols, col_2)
+        }
       }
     }
   }
