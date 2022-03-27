@@ -10,7 +10,7 @@
 #' @return A vector of duplicate column names.
 #' @export
 #' @importFrom magrittr %>%
-#' @importFrom dplyr select, all_of, last_col
+#' @importFrom dplyr select all_of last_col
 #' @examples
 #' \dontrun{
 #' detect_dupl_cols(dataset = head(mutate(mtcars, mpg_2 =  mpg)), duplicate_col = "right")
@@ -21,7 +21,7 @@ detect_dupl_cols <- function(dataset, duplicate_col = "right"){
   # A vector to collect names of duplicated columns
   duplicate_cols = NULL
 
-  for(col_1 in df %>% select(1:last_col(1)) %>% names()){
+  for(col_1 in dataset %>% select(1:last_col(1)) %>% names()){
 
     # Don't check for duplicate of already detected duplicate columns, since its duplicates would have been detected already
     if(col_1 %in% duplicate_cols){
@@ -29,13 +29,12 @@ detect_dupl_cols <- function(dataset, duplicate_col = "right"){
     }
 
     # Check col_1 is duplicated with any of the columns to its right
-    for(col_2 in df %>% select(all_of(col_1):last_col()) %>% names()){
+    for(col_2 in dataset %>% select(all_of(col_1):last_col()) %>% names()){
 
       # Don't check for duplicate of already detected duplicate columns, since its duplicates would have been detected already
       if(col_2 %in% duplicate_cols){
         next
       }
-
 
       # Don't treat a column as a duplicate of itself, obviously!
       if(col_1 == col_2){
@@ -43,7 +42,7 @@ detect_dupl_cols <- function(dataset, duplicate_col = "right"){
       }
 
       # If col_1 and col_2 are exactly identical, collect column name.
-      if(all(df[,col_1] == df[,col_2])){
+      if(all(dataset[,col_1] == dataset[,col_2])){
         if(duplicate_col == "right"){
           duplicate_cols = c(duplicate_cols, col_2)
         }else if(duplicate_col == "left"){

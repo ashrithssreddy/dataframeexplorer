@@ -1,13 +1,13 @@
 Package: dataframeexplorer
 Title: Familiarity with Dataframes Before Data Manipulation
-Version: 1.0.0
+Version: 1.0.1
 Authors@R: person("Ashrith", "Reddy", email = "ashrithssreddy@gmail.com", role = c("aut", "cre"))
 Description: Real life data is muddy, fuzzy and unpredictable. This makes data manipulations tedious and bringing the data to right shape alone is a major chunk of work. Functions in this package help us get an understanding of dataframes to dramatically reduces data coding time.
 Depends: R (>= 3.3.0)
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Imports:
     tibble,
 	data.table,
@@ -17,4 +17,3 @@ Imports:
 	plyr,
 	tidyr,
 	stringr
-	
