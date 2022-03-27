@@ -1,19 +1,19 @@
-#' Generate frequency of each entry in each column of dataframe
+#' Detect if any column of a data.frame is a duplicate of another
 #'
-#' Real-life data is seldom perfect and fields in a data.frame contains entries not anticipated by the data scientist.
-#' This function helps to know your data entries before performing any manipulations on it.
-#' This function generates frequency table excel, each column of input dataframe in a separate sheet in output excel file.
+#' It occasionally happens that 2 (or more) columns in dataframe are exactly identical.
+#' This could lead to redundant computational cost and unexpected behavior in Machine Learning methods.
+#' This function scans though all column combinations of dataframe and examines if any column combinations are exactly identical.
 #'
 #' @param df A data.frame
-#' @param duplicate_col If 2 columns are identical, which column should be treated as duplicate,
+#' @param duplicate_col If 2 columns are identical, which column should be treated as duplicate?
 #' Use "right" for right column, "left" for left.
-#' @return A vector of duplicate column names
+#' @return A vector of duplicate column names.
 #' @export
 #' @importFrom magrittr %>%
 #' @importFrom dplyr select, all_of, last_col
 #' @examples
 #' \dontrun{
-#' frequency_table(dataset = mutate(mtcars, mpg_2 =  mpg), duplicate_col = "right")
+#' detect_dupl_cols(dataset = head(mutate(mtcars, mpg_2 =  mpg)), duplicate_col = "right")
 #' }
 
 rm(list=ls())
