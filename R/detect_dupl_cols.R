@@ -54,5 +54,7 @@ detect_dupl_cols <- function(dataset, duplicate_col = "right"){
       }
     } # col_2 for loop ends here
   } # col_1 for loop ends here
+
+  if(is.null(duplicate_cols)) message("No duplicate columns found. Returning NULL.")
   return(duplicate_cols)
 } # function ends here
