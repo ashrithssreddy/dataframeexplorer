@@ -23,8 +23,19 @@ detect_dupl_cols <- function(dataset, duplicate_col = "right"){
 
   for(col_1 in df %>% select(1:last_col(1)) %>% names()){
 
+    # Don't check for duplicate of already detected duplicate columns, since its duplicates would have been detected already
+    if(col_1 %in% duplicate_cols){
+      next
+    }
+
     # Check col_1 is duplicated with any of the columns to its right
     for(col_2 in df %>% select(all_of(col_1):last_col()) %>% names()){
+
+      # Don't check for duplicate of already detected duplicate columns, since its duplicates would have been detected already
+      if(col_2 %in% duplicate_cols){
+        next
+      }
+
 
       # Don't treat a column as a duplicate of itself, obviously!
       if(col_1 == col_2){
