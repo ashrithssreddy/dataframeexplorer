@@ -1,3 +1,21 @@
+#' Generate frequency of each entry in each column of dataframe
+#'
+#' Real-life data is seldom perfect and fields in a data.frame contains entries not anticipated by the data scientist.
+#' This function helps to know your data entries before performing any manipulations on it.
+#' This function generates frequency table excel, each column of input dataframe in a separate sheet in output excel file.
+#'
+#' @param df A data.frame
+#' @param duplicate_col If 2 columns are identical, which column should be treated as duplicate,
+#' Use "right" for right column, "left" for left.
+#' @return A vector of duplicate column names
+#' @export
+#' @importFrom magrittr %>%
+#' @importFrom dplyr select, all_of, last_col
+#' @examples
+#' \dontrun{
+#' frequency_table(dataset = mutate(mtcars, mpg_2 =  mpg), duplicate_col = "right")
+#' }
+
 rm(list=ls())
 cat("\014")
 
@@ -56,4 +74,9 @@ df %>%
 # col_combinations$y
 
 
+# Next steps
+# avoid checking duplicates of already detected duplicate column
+# docstrings
+# Return positions of columns instead of column names
+# comments
 
