@@ -16,7 +16,7 @@
 #' detect_dupl_cols(dataset = head(mutate(mtcars, mpg_2 =  mpg)), duplicate_col = "right")
 #' }
 
-detect_dupl_cols <- function(dataset, duplicate_col = "right"){
+detect_dupl_cols <- function(dataset, return_type = "col_names", duplicate_col = "right"){
 
   # A vector to collect names of duplicated columns
   duplicate_cols = NULL
@@ -55,6 +55,26 @@ detect_dupl_cols <- function(dataset, duplicate_col = "right"){
     } # col_2 for loop ends here
   } # col_1 for loop ends here
 
-  if(is.null(duplicate_cols)) message("No duplicate columns found. Returning NULL.")
-  return(duplicate_cols)
+  if(return_type == "col_names"){
+    if(is.null(duplicate_cols)){
+      message("No duplicate columns found. Returning NULL.")
+      return(NULL)
+    }
+    return(duplicate_cols)
+  }else if(return_type == "col_positions"){
+    if(is.null(duplicate_cols)){
+      message("No duplicate columns found. Returning NULL.")
+      return(NULL)
+    }
+    return(which(duplicate_cols %in% names(dataset)))
+  }else if(return_type == "dataset"){
+    if(is.null(duplicate_cols)){
+      message("No duplicate columns found. Returning original dataset.")
+      return(dataset)
+    }
+    return(dataset %>% select(-any_of(duplicate_cols)))
+  }else{
+    error("Invalid value passed for return_type. Use 'col_names', 'col_positions' or 'dataset'")
+  }
+
 } # function ends here
