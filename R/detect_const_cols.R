@@ -23,7 +23,7 @@ detect_const_cols <- function(dataset, return_type = "col_names"){
     dataset %>% select(-any_of(const_colnames))
 
   }else{
-    error("Invalid value passed for return_type. Use 'col_names', 'col_positions' or 'dataset'")
+    stop("Invalid value passed for return_type. Use 'col_names', 'col_positions' or 'dataset'")
   }
 
 } # function ends here
@@ -33,6 +33,7 @@ detect_const_cols <- function(dataset, return_type = "col_names"){
 # dataset %>% detect_const_cols(return_type = "col_names")
 # dataset %>% detect_const_cols(return_type = "col_positions")
 # dataset %>% detect_const_cols(return_type = "dataset")
+dataset %>% detect_const_cols(return_type = "blah-blah")
 
 # Next Steps
 # Missing values incorporate

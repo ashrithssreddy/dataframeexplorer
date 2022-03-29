@@ -76,7 +76,7 @@ detect_dupl_cols <- function(dataset, return_type = "col_names", duplicate_col =
     }
     return(dataset %>% select(-any_of(duplicate_cols)))
   }else{
-    error("Invalid value passed for return_type. Use 'col_names', 'col_positions' or 'dataset'")
+    stop("Invalid value passed for return_type. Use 'col_names', 'col_positions' or 'dataset'")
   }
 
 } # function ends here
