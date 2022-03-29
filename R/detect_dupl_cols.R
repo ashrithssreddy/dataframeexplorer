@@ -68,7 +68,7 @@ detect_dupl_cols <- function(dataset, return_type = "col_names", duplicate_col =
       message("No duplicate columns found. Returning NULL.")
       return(NULL)
     }
-    return(which(duplicate_cols %in% names(dataset)))
+    return(which(names(dataset) %in% duplicate_cols))
   }else if(return_type == "dataset"){
     if(is.null(duplicate_cols)){
       message("No duplicate columns found. Returning original dataset.")
