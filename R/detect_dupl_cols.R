@@ -20,6 +20,15 @@
 
 detect_dupl_cols <- function(dataset, return_type = "col_names", duplicate_col = "right"){
 
+  # Check/fix inputs
+  if("data.frame" %in% class(dataset) == F)
+    stop("class of dataset must be a data.frame")
+  if(return_type %in% c("col_names", "col_positions", "dataset") == F)
+    stop('return_type must be "col_names", "col_positions" or "dataset". Or simply use default value')
+  if(duplicate_col %in% c("left", "right") == F)
+    stop('duplicate_col must be "left" or "left". Or simply use default value')
+  dataset = dataset %>% as.data.frame() # forcing data.frame like objects to data.frame only
+
   # A vector to collect names of duplicated columns
   duplicate_cols = NULL
 
@@ -49,9 +58,6 @@ detect_dupl_cols <- function(dataset, return_type = "col_names", duplicate_col =
           duplicate_cols = c(duplicate_cols, col_2)
         }else if(duplicate_col == "left"){
           duplicate_cols = c(duplicate_cols, col_1)
-        }else{
-          message("Invalid value passed to duplicate_col parameter (use 'left' or 'right'). Using default value of 'right' for now")
-          duplicate_cols = c(duplicate_cols, col_2)
         }
       }
     } # col_2 for loop ends here
@@ -75,8 +81,6 @@ detect_dupl_cols <- function(dataset, return_type = "col_names", duplicate_col =
       return(dataset)
     }
     return(dataset %>% select(-any_of(duplicate_cols)))
-  }else{
-    stop("Invalid value passed for return_type. Use 'col_names', 'col_positions' or 'dataset'")
   }
 
 } # function ends here
