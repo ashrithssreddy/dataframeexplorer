@@ -10,6 +10,13 @@
 
 detect_const_cols <- function(dataset, return_type = "col_names"){
 
+  # Check/fix inputs
+  if("data.frame" %in% class(dataset) == F)
+    stop("class of dataset must be a data.frame")
+  if(return_type %in% c("col_names", "col_positions", "dataset") == F)
+    stop('return_type must be "col_names", "col_positions" or "dataset". Or simply use default value')
+  dataset = dataset %>% as.data.frame() # forcing data.frame like objects to data.frame only
+
   # A vector to collect names of const columns
   const_colnames = which(sapply(dataset, function(x) length(unique(x)))==1) %>% names
 
@@ -22,9 +29,6 @@ detect_const_cols <- function(dataset, return_type = "col_names"){
 
   }else if(return_type == "dataset"){
     return(dataset %>% select(-any_of(const_colnames)))
-
-  }else{
-    stop("Invalid value passed for return_type. Use 'col_names', 'col_positions' or 'dataset'")
   }
 
 } # function ends here
@@ -38,3 +42,4 @@ detect_const_cols <- function(dataset, return_type = "col_names"){
 # Next Steps
 # Missing values incorporate
 # Convert a matrix to a dataframe inside
+
