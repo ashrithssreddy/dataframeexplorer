@@ -8,7 +8,7 @@
 #' detect_const_cols(dataset = head(mutate(mtcars, mpg_2 =  999)))
 #' }
 
-detect_const_cols <- function(dataset, return_type = "col_names"){
+detect_const_cols <- function(dataset, return_type = "col_names", ignore_na = F){
 
   # Check/fix inputs
   if("matrix" %in% class(dataset) == T){
