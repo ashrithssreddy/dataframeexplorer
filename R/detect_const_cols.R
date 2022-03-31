@@ -11,6 +11,10 @@
 detect_const_cols <- function(dataset, return_type = "col_names"){
 
   # Check/fix inputs
+  if("matrix" %in% class(dataset) == F){
+    warning("matrix was provided when data.frame was expected. Converting to data.frame")
+    dataset = dataset %>% as.data.frame
+  }
   if("data.frame" %in% class(dataset) == F)
     stop("class of dataset must be a data.frame")
   if(return_type %in% c("col_names", "col_positions", "dataset") == F)
