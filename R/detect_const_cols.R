@@ -11,7 +11,7 @@
 detect_const_cols <- function(dataset, return_type = "col_names"){
 
   # Check/fix inputs
-  if("matrix" %in% class(dataset) == F){
+  if("matrix" %in% class(dataset) == T){
     warning("matrix was provided when data.frame was expected. Converting to data.frame")
     dataset = dataset %>% as.data.frame
   }
@@ -22,7 +22,8 @@ detect_const_cols <- function(dataset, return_type = "col_names"){
   dataset = dataset %>% as.data.frame() # forcing data.frame like objects to data.frame only
 
   # A vector to collect names of const columns
-  const_colnames = which(sapply(dataset, function(x) length(unique(x)))==1) %>% names
+  const_colnames = which(sapply(dataset, function(x)
+    ifelse(ignore_na, length(unique(na.omit(x)))==1,length(unique(x))==1))) %>% names
 
   # Return according to return_type parameter
   if(return_type == "col_names"){
@@ -38,8 +39,8 @@ detect_const_cols <- function(dataset, return_type = "col_names"){
 } # function ends here
 
 # Tests
-# dataset = mtcars %>% mutate(mpg = 999, hp = 100) %>% head
-# dataset %>% detect_const_cols(return_type = "col_names")
+dataset = mtcars %>% mutate(mpg = 999, hp = 100) %>% head
+dataset %>% detect_const_cols(return_type = "col_names")
 # dataset %>% detect_const_cols(return_type = "col_positions")
 # dataset %>% detect_const_cols(return_type = "blah-blah")
 
