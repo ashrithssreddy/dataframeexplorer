@@ -12,7 +12,7 @@ detect_const_cols <- function(dataset, return_type = "col_names", ignore_na = F)
 
   # Check/fix inputs
   if("matrix" %in% class(dataset) == T){
-    warning("matrix was provided when data.frame was expected. Converting to data.frame")
+    warning("matrix was provided when data.frame was expected. Attempting to convert to data.frame")
     dataset = dataset %>% as.data.frame
   }
   if("data.frame" %in% class(dataset) == F)
@@ -45,6 +45,5 @@ dataset %>% detect_const_cols(return_type = "col_names")
 # dataset %>% detect_const_cols(return_type = "blah-blah")
 
 # Next Steps
-# Missing values incorporate
 # Convert a matrix to a dataframe inside
 

@@ -21,8 +21,8 @@
 detect_dupl_cols <- function(dataset, return_type = "col_names", duplicate_col = "right"){
 
   # Check/fix inputs
-  if("matrix" %in% class(dataset) == F){
-    warning("matrix was provided when data.frame was expected. Converting to data.frame")
+  if("matrix" %in% class(dataset) == T){
+    warning("matrix was provided when data.frame was expected. Attempting to convert to data.frame")
     dataset = dataset %>% as.data.frame
   }
   if("data.frame" %in% class(dataset) == F)
