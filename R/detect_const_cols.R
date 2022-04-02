@@ -1,8 +1,16 @@
-#' Detect if any column of a data.frame constant values
+#' Detect if any column of a data.frame has constant values.
+#'
+#' It occasionally happens that a column in dataframe contains a single value throughout.
+#' This could lead to redundant computational cost and unexpected behavior in Machine Learning methods.
+#' This function scans though all columns of dataframe to examine if any column has no variation.
 #'
 #' @param dataset A data.frame
-#' @return.
+#' @param return_type How to return detected constant columns
+#' Use "col_names", "col_positions" or "dataset" to return dataset with deleted constant columns
+#' @param ignore_na Whether NA should be ignored while checking if a column has just 1 unique value
+#' @return. A vector of constant column-names or column positions or dataset with deleted constant columns. Use return_type parameter to specify.
 #' @export
+#' @importFrom magrittr %>%
 #' @examples
 #' \dontrun{
 #' detect_const_cols(dataset = head(mutate(mtcars, mpg_2 =  999)))
@@ -39,9 +47,10 @@ detect_const_cols <- function(dataset, return_type = "col_names", ignore_na = F)
 } # function ends here
 
 # Tests
-dataset = mtcars %>% mutate(mpg = 999, hp = 100) %>% head
-dataset %>% detect_const_cols(return_type = "col_names")
+# dataset = mtcars %>% mutate(mpg = 999, hp = 100) %>% head
+# dataset %>% detect_const_cols(return_type = "col_names")
 # dataset %>% detect_const_cols(return_type = "col_positions")
+# dataset %>% detect_const_cols(return_type = "dataset")
 # dataset %>% detect_const_cols(return_type = "blah-blah")
 
 # Next Steps

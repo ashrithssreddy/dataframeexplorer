@@ -4,16 +4,19 @@
 \alias{detect_dupl_cols}
 \title{Detect if any column of a data.frame is a duplicate of another}
 \usage{
-detect_dupl_cols(dataset, duplicate_col = "right")
+detect_dupl_cols(dataset, return_type = "col_names", duplicate_col = "right")
 }
 \arguments{
 \item{dataset}{A data.frame}
+
+\item{return_type}{How to return detected duplicate columns
+Use "col_names", "col_positions" or "dataset" to return dataset with deleted duplicate columns}
 
 \item{duplicate_col}{If 2 columns are identical, which column should be treated as duplicate?
 Use "right" for right column, "left" for left.}
 }
 \value{
-A vector of duplicate column names.
+A vector of duplicate column names or column positions or dataset with deleted duplicate columns. Use return_type parameter to specify.
 }
 \description{
 It occasionally happens that 2 (or more) columns in dataframe are exactly identical.
