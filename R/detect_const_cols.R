@@ -33,7 +33,7 @@ detect_const_cols <- function(dataset, return_type = "col_names", ignore_na = F)
   const_colnames = which(sapply(dataset, function(x)
     ifelse(ignore_na, length(unique(na.omit(x)))==1,length(unique(x))==1))) %>% names
 
-  # Return according to return_type parameter
+  # Return results according to return_type parameter
   if(return_type == "col_names"){
     return(const_colnames)
 
@@ -47,12 +47,11 @@ detect_const_cols <- function(dataset, return_type = "col_names", ignore_na = F)
 } # function ends here
 
 # Tests
-# dataset = mtcars %>% mutate(mpg = 999, hp = 100) %>% head
+# dataset = mtcars %>% head %>% mutate(mpg = 999, hp = c(100,NA,100,NA, 100, NA))
+# dataset = mtcars %>% head %>% mutate(mpg = 999, hp = 100)
 # dataset %>% detect_const_cols(return_type = "col_names")
 # dataset %>% detect_const_cols(return_type = "col_positions")
 # dataset %>% detect_const_cols(return_type = "dataset")
 # dataset %>% detect_const_cols(return_type = "blah-blah")
-
-# Next Steps
-# Convert a matrix to a dataframe inside
-
+# dataset %>% detect_const_cols(ignore_na = F)
+# dataset %>% detect_const_cols(ignore_na = T)

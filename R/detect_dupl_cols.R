@@ -7,7 +7,7 @@
 #' @param dataset A data.frame
 #' @param return_type How to return detected duplicate columns
 #' Use "col_names", "col_positions" or "dataset" to return dataset with deleted duplicate columns
-#' @param duplicate_col If 2 columns are identical, which column should be treated as duplicate?
+#' @param duplicate_col If 2 columns are identical, which of the 2 columns should be treated as duplicate?
 #' Use "right" for right column, "left" for left.
 #' @return A vector of duplicate column names or column positions or dataset with deleted duplicate columns. Use return_type parameter to specify.
 #' @export
