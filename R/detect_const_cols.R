@@ -11,6 +11,8 @@
 #' @return. A vector of constant column-names or column positions or dataset with deleted constant columns. Use return_type parameter to specify.
 #' @export
 #' @importFrom magrittr %>%
+#' @importFrom stats na.omit
+#' @importFrom dplyr select any_of
 #' @examples
 #' \dontrun{
 #' detect_const_cols(dataset = head(mutate(mtcars, mpg_2 =  999)))
@@ -53,5 +55,4 @@ detect_const_cols <- function(dataset, return_type = "col_names", ignore_na = F)
 # dataset %>% detect_const_cols(return_type = "col_positions")
 # dataset %>% detect_const_cols(return_type = "dataset")
 # dataset %>% detect_const_cols(return_type = "blah-blah")
-# dataset %>% detect_const_cols(ignore_na = F)
 # dataset %>% detect_const_cols(ignore_na = T)

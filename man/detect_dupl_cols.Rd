@@ -12,7 +12,7 @@ detect_dupl_cols(dataset, return_type = "col_names", duplicate_col = "right")
 \item{return_type}{How to return detected duplicate columns
 Use "col_names", "col_positions" or "dataset" to return dataset with deleted duplicate columns}
 
-\item{duplicate_col}{If 2 columns are identical, which column should be treated as duplicate?
+\item{duplicate_col}{If 2 columns are identical, which of the 2 columns should be treated as duplicate?
 Use "right" for right column, "left" for left.}
 }
 \value{

@@ -12,7 +12,7 @@
 #' @return A vector of duplicate column names or column positions or dataset with deleted duplicate columns. Use return_type parameter to specify.
 #' @export
 #' @importFrom magrittr %>%
-#' @importFrom dplyr select all_of last_col
+#' @importFrom dplyr select all_of any_of last_col
 #' @examples
 #' \dontrun{
 #' detect_dupl_cols(dataset = head(mutate(mtcars, mpg_2 =  mpg)), duplicate_col = "right")
