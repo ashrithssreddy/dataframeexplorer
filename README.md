@@ -1,7 +1,7 @@
 
 # dataframeexplorer
 
-[![CRAN](https://img.shields.io/cran/v/dataframeexplorer?color=blue)](https://cran.r-project.org/package=dataframeexplorer) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![CRAN](https://img.shields.io/cran/v/dataframeexplorer?color=blue)](https://cran.r-project.org/package=dataframeexplorer) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT) [![CRAN Downloads](https://cranlogs.r-pkg.org/badges/grand-total/dataframeexplorer)](https://cranlogs.r-pkg.org/badges/grand-total/dataframeexplorer)
 
 A toolkit to simplify data exploration and preparation in R, enabling quicker insights and reducing time spent on tedious data manipulations.
 
